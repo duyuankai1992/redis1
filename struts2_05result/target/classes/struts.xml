@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="login" extends="struts-default" namespace="/login">	
+		<action name="login" class="com.yztc.demo.web.action.LoginAction">
+			
+			<!-- type="chain" action转发到action -->
+			<!-- <result name="success" type="chain">
+				<param name="namespace">/user</param>
+				<param name="actionName">user_findAll</param>
+			</result> -->
+			
+			<!-- <result name="success" type="redirectAction">
+				<param name="namespace">/user</param>
+				<param name="actionName">user_findAll</param>
+			</result>	 -->	
+			<result name="success" type="redirect">
+				/user/user_findAll.action
+			</result>
+		</action>	
+		
+		<action name="toLogin">
+			<!-- type="dispatcher" 转发到JSP -->
+			<!-- <result type="dispatcher" name="success">
+				<param name="location">/login.jsp</param>
+			</result> -->
+			<result type="redirect" name="success">
+				<param name="location">/login.jsp</param>
+			</result>
+		</action>	
+	</package>	
+	
+	<package name="user" extends="struts-default" namespace="/user">
+		<action name="user_*" class="com.yztc.demo.web.action.UserAction" method="{1}">
+			<result name="findAll">/success.jsp</result>
+		</action>
+	</package>
+
+</struts>
